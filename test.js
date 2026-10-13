@@ -1,0 +1,11 @@
+const E=require('./engine.js'),a=require('assert'),H=36e5,t=(h,m=0)=>Date.UTC(2026,0,5,h,m);
+a.equal(E.rendered({in:t(8),out:t(17),breaks:[{s:t(12),e:t(13)}]}),8*H);
+a.equal(E.rendered({in:t(8),out:t(17),breaks:[{s:t(10),e:t(10,15)},{s:t(12),e:t(13)}]}),7.75*H);
+a.equal(E.rendered({in:t(8),out:null}),0);
+a.equal(E.rendered({in:t(22),out:t(22)+8*H}),8*H);
+a.equal(E.rendered({in:t(8),out:t(9),breaks:[{s:t(8),e:t(10)}]}),0);
+a.ok(E.validate({id:1,in:t(8),out:t(8)}).length);
+a.ok(E.validate({id:2,in:t(8),out:t(17),breaks:[{s:t(12),e:t(11)}]}).length);
+a.ok(E.validate({id:3,in:t(9),out:t(10)},[{id:1,in:t(8),out:t(17)}]).length);
+a.equal(E.validate({id:4,in:t(8),out:t(17),breaks:[{s:t(12),e:t(13)}]},[]).length,0);
+console.log('engine tests passed');
